@@ -1,0 +1,58 @@
+
+Complexity of:
+
+Enqueue using an array:
+
+For each element enqueued:
+    - Check if the array is full.
+      - If it is, the element is not enqueued and the operation is over.
+      - Else add the element to the first free index of the array.
+        - If the last free index is recorded by the Queue, this is a single operation to record the first empty index.
+          - End.
+        - Else the array must be traversed to find the first free index. This is an incorrect implementation.
+    - End.
+
+While the enqueue operation consists of more than one distinct operation, a correct implementation does not
+require the whole collection to be traversed, which would cause this to be an O(n) operation.
+
+For large values of N the cost of these distinct operations is therefore not significant, so enqueueing for a Queue
+backed by an array is O(1).
+
+Dequeue using an array:
+
+For each element dequeued:
+    - Check if the array is empty.
+      - If it is, no element is dequeued, End.
+      - Else remove the element from the first full index of the array.
+      - If the first full index is not recorded the array must either:
+            - Be traversed to find the first full index, given that this array empties from the left, OR
+            - The zero-th index is always emptied, then the array is traversed to update the index of
+            each element, i, to i - 1.
+
+Therefore an incorrect implementation is also O(n), but a correct implementation is O(1).
+
+
+Enqueue using a SinglyLinkedList:
+
+For each element enqueued:
+    - If 'head' is null, then set 'head' to a Node containing the element, N.
+      - Set 'tail' to 'head'.
+    - Else set 'next' of 'tail' to N.
+    -End.
+
+This is at worst 2 operations per element, so for large 'n' the cost of the 2 operations is not significant to 'n'.
+Enqueueing an element using a SinglyLinkedList is O(1).
+
+Dequeue using a SinglyLinkedList:
+
+For each element dequeued:
+    - If 'head' is null, then End.
+    - Else the element returned is 'head'. Set 'head' to head.next.
+      - Record 'head', R.
+      - Set 'head' to head.next
+      - Delete 'head'
+      - Return R.
+    -End.
+
+This is at worst 4 operations per element, so for large 'n' the cost of the 4 operations is not significant to 'n'.
+Enqueueing an element using a SinglyLinkedList is O(1).
